@@ -1,17 +1,19 @@
-public abstract class RangeRole extends Role {
+package com.rpg.roles.range;
+import com.rpg.core.Role;
 
-    private int range;
-    private int energy;
-    private int maxEnergy;
+// RangeRole.java
+public abstract class RangeRole extends Role {
+    private int range;          // 射程
+    private int energy;         // 當前能量
+    private int maxEnergy;      // 最大能量
     private String rangedAttackType;
 
     public RangeRole(String name, int health, int attackPower,
                      int range, int maxEnergy, String rangedAttackType) {
-
         super(name, health, attackPower);
         this.range = range;
-        this.energy = maxEnergy;
         this.maxEnergy = maxEnergy;
+        this.energy = maxEnergy;
         this.rangedAttackType = rangedAttackType;
     }
 
@@ -31,13 +33,16 @@ public abstract class RangeRole extends Role {
         return rangedAttackType;
     }
 
-    public boolean consumeEnergy(int cost) {
-        if (energy < cost) return false;
+    protected boolean consumeEnergy(int cost) {
+        if (energy < cost) {
+            return false;
+        }
         energy -= cost;
         return true;
     }
 
     public void recoverEnergy(int amount) {
-        energy = Math.min(maxEnergy, energy + amount);
+        energy += amount;
+        if (energy > maxEnergy) energy = maxEnergy;
     }
 }

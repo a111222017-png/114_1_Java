@@ -1,3 +1,7 @@
+package com.rpg.roles.range;
+import com.rpg.core.Role;
+
+
 public class Priest extends Role {
 
     private int groupHealPower;   // 群體治療量
